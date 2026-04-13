@@ -10,9 +10,14 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.set_tag.outputs.image_tag }}
     steps:
       - name: Set short SHA
-        run: echo "SHORT_SHA=${GITHUB_SHA::6}" >> $GITHUB_ENV
+        id: set_tag
+        run: |
+          echo "SHORT_SHA=${GITHUB_SHA::6}" >> $GITHUB_ENV
+          echo "image_tag=${GITHUB_SHA::6}" >> $GITHUB_OUTPUT
       -
         name: Login to Docker Hub
         uses: docker/login-action@v4
@@ -44,4 +49,5 @@ jobs:
             --grpc-web \
             --username admin \
             --password  ${{ secrets.ARGOCD_PASSWORD }}
+          argocd app set python-app --helm-set image.tag=${{ needs.ci.outputs.image_tag }}
           argocd app sync python-app
