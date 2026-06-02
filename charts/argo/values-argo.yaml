@@ -4,9 +4,6 @@ redis-ha:
 controller:
   replicas: 1
 
-server:
-  replicas: 1
-
 repoServer:
   replicas: 1
 
@@ -14,15 +11,15 @@ applicationSet:
   replicas: 1
 
 global:
-  domain: argocd.test.com
+  domain: argocd.pe-backstage.local
 
-certificate:
-  enabled: true
+configs:
+  params:
+    server.insecure: "true"
 
 server:
+  replicas: 1
+  extraArgs:
+    - --insecure
   ingress:
-    annotations: 
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    enabled: true
-    ingressClassName: nginx
-    tls: true
+    enabled: false

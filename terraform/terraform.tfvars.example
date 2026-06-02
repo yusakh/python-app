@@ -1,0 +1,4 @@
+node_ip        = "192.168.1.X"    # current DHCP IP of the VM in maintenance mode
+vip            = "192.168.1.Y"    # static IP to reserve for the cluster endpoint (not in DHCP pool)
+cluster_name   = "talos-local"
+nic_mac_prefix = "bc:24:11:*"     # default for Proxmox VirtIO; verify with: talosctl --insecure -n <node_ip> get links
