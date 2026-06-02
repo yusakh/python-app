@@ -1,6 +1,6 @@
 kind/
 pythonapp/
-.*token
+*token
 output/
 terraform/.terraform/
 terraform/.terraform.lock.hcl
