@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  parentRefs:
+    - name: main-gateway
+      namespace: envoy-gateway-system
+      sectionName: tls-passthrough
+  hostnames:
+    - argocd.pe-backstage.local
+  rules:
+    - backendRefs:
+        - name: argocd-server
+          port: 443

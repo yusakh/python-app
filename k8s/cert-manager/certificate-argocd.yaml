@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd-server-tls
+  namespace: argocd
+spec:
+  secretName: argocd-server-tls
+  issuerRef:
+    name: pe-backstage-ca-issuer
+    kind: ClusterIssuer
+  commonName: argocd.pe-backstage.local
+  dnsNames:
+    - argocd.pe-backstage.local
+    - argocd-server.argocd
+    - argocd-server.argocd.svc
+    - argocd-server.argocd.svc.cluster.local

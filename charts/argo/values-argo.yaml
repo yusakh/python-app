@@ -13,13 +13,7 @@ applicationSet:
 global:
   domain: argocd.pe-backstage.local
 
-configs:
-  params:
-    server.insecure: "true"
-
 server:
   replicas: 1
-  extraArgs:
-    - --insecure
   ingress:
     enabled: false
